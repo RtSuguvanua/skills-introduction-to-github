@@ -207,6 +207,7 @@ function AppRouter() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
+      <Route path="/public-report" element={<PublicReport />} />
       <Route
         path="/dashboard"
         element={
