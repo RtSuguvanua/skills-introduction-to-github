@@ -30,6 +30,7 @@ import {
 const navItems = [
   { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { path: '/businesses', label: 'Business Register', icon: Building2 },
+  { path: '/reports', label: 'Reports & Analytics', icon: BarChart3 },
   { path: '/import', label: 'Data Import', icon: Upload, role: 'officer' },
   { path: '/fsic', label: 'FSIC Codes', icon: FolderTree },
   { path: '/users', label: 'User Management', icon: Users, role: 'admin' },
