@@ -1132,6 +1132,76 @@ async def broadcast_notification(request: Request):
     
     return {"message": f"Notification sent to {len(notifications)} users"}
 
+# ============== PUBLIC REPORTS ROUTES ==============
+
+@api_router.get("/public/statistics")
+async def get_public_statistics():
+    """Get public statistics for publishing - no authentication required"""
+    total_businesses = await db.businesses.count_documents({})
+    active_businesses = await db.businesses.count_documents({"status": "active"})
+    inactive_businesses = await db.businesses.count_documents({"status": "inactive"})
+    
+    # By survey
+    survey_stats = []
+    for survey in ESTABLISHMENT_SURVEYS:
+        count = await db.businesses.count_documents({"establishment_survey": survey})
+        if count > 0:
+            survey_stats.append({"survey": survey, "count": count})
+    
+    # By section
+    section_stats = []
+    for section, info in FSIC_SECTIONS.items():
+        divisions = info["divisions"]
+        count = await db.businesses.count_documents({
+            "fsic_code": {"$regex": f"^({'|'.join(divisions)})"}
+        })
+        if count > 0:
+            section_stats.append({
+                "section": section,
+                "name": info["name"],
+                "count": count
+            })
+    
+    # By province
+    province_pipeline = [
+        {"$match": {"province": {"$exists": True, "$ne": None}}},
+        {"$group": {"_id": "$province", "count": {"$sum": 1}}},
+        {"$sort": {"count": -1}}
+    ]
+    province_stats = await db.businesses.aggregate(province_pipeline).to_list(50)
+    
+    # By status
+    status_pipeline = [
+        {"$group": {"_id": "$status", "count": {"$sum": 1}}},
+        {"$sort": {"count": -1}}
+    ]
+    status_stats = await db.businesses.aggregate(status_pipeline).to_list(10)
+    
+    return {
+        "report_title": "Fiji Business Register Statistics",
+        "organization": "Fiji Bureau of Statistics",
+        "division": "Economics Statistics Division",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "summary": {
+            "total_businesses": total_businesses,
+            "active_businesses": active_businesses,
+            "inactive_businesses": inactive_businesses,
+            "active_rate": round((active_businesses / total_businesses * 100), 1) if total_businesses > 0 else 0,
+            "total_sections": len([s for s in section_stats if s["count"] > 0]),
+            "total_provinces": len(province_stats)
+        },
+        "by_survey": sorted(survey_stats, key=lambda x: x["count"], reverse=True),
+        "by_section": sorted(section_stats, key=lambda x: x["count"], reverse=True),
+        "by_province": [{"province": s["_id"], "count": s["count"]} for s in province_stats],
+        "by_status": [{"status": s["_id"] or "unknown", "count": s["count"]} for s in status_stats],
+        "methodology": {
+            "classification": "FSIC 2010 (Based on ISIC Rev. 4)",
+            "data_sources": ["Administrative Records", "FRCS Data", "MOJ Registrations", "Economic Surveys"],
+            "coverage": "All registered businesses in Fiji engaged in production of goods and services"
+        },
+        "disclaimer": "These statistics are produced by the Fiji Bureau of Statistics for official use. Data is subject to revision."
+    }
+
 # ============== REFERENCE DATA ROUTES ==============
 
 @api_router.get("/reference/provinces")
