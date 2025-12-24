@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../App';
 import { Building2, Shield, FileSpreadsheet, BarChart3, Globe, Users } from 'lucide-react';
 import { Button } from '../components/ui/button';
