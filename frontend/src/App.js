@@ -247,6 +247,14 @@ function AppRouter() {
         }
       />
       <Route
+        path="/reports"
+        element={
+          <ProtectedRoute>
+            <Reports />
+          </ProtectedRoute>
+        }
+      />
+      <Route
         path="/users"
         element={
           <ProtectedRoute requiredRole="admin">
