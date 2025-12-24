@@ -102,6 +102,19 @@ export default function LandingPage() {
             Sign in with Google
           </Button>
           
+          <div className="mt-4">
+            <Button
+              asChild
+              variant="outline"
+              className="border-white/30 text-white hover:bg-white/10"
+              data-testid="public-report-btn"
+            >
+              <Link to="/public-report">
+                View Public Statistics Report
+              </Link>
+            </Button>
+          </div>
+          
           <p className="text-white/60 text-sm mt-4">
             Authorized access for Fiji Bureau of Statistics personnel
           </p>
