@@ -1,0 +1,119 @@
+{
+  "timestamp": "2025-12-24T08:51:57.767692",
+  "base_url": "https://businessreg-fiji.preview.emergentagent.com",
+  "summary": {
+    "total_tests": 15,
+    "passed_tests": 12,
+    "failed_tests": 3,
+    "success_rate": "80.0%"
+  },
+  "test_results": [
+    {
+      "test": "Root API endpoint",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-12-24T08:51:57.227852"
+    },
+    {
+      "test": "FSIC Sections endpoint",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-12-24T08:51:57.265554"
+    },
+    {
+      "test": "FSIC Divisions endpoint",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-12-24T08:51:57.305434"
+    },
+    {
+      "test": "FSIC Lookup endpoint",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-12-24T08:51:57.341389"
+    },
+    {
+      "test": "Surveys endpoint",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-12-24T08:51:57.381343"
+    },
+    {
+      "test": "Provinces endpoint",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-12-24T08:51:57.415463"
+    },
+    {
+      "test": "Divisions endpoint",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-12-24T08:51:57.449333"
+    },
+    {
+      "test": "Dashboard stats (no auth)",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-12-24T08:51:57.485913"
+    },
+    {
+      "test": "Businesses list (no auth)",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-12-24T08:51:57.522887"
+    },
+    {
+      "test": "Auth me (no token)",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-12-24T08:51:57.556474"
+    },
+    {
+      "test": "Excel import (no auth)",
+      "success": false,
+      "details": "Expected 401, got: None",
+      "timestamp": "2025-12-24T08:51:57.590897"
+    },
+    {
+      "test": "FRCS import (no auth)",
+      "success": false,
+      "details": "Expected 401, got: None",
+      "timestamp": "2025-12-24T08:51:57.625825"
+    },
+    {
+      "test": "MOJ import (no auth)",
+      "success": false,
+      "details": "Expected 401, got: None",
+      "timestamp": "2025-12-24T08:51:57.659551"
+    },
+    {
+      "test": "Users list (no auth)",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-12-24T08:51:57.733131"
+    },
+    {
+      "test": "Notifications (no auth)",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-12-24T08:51:57.767661"
+    }
+  ],
+  "failed_tests": [
+    {
+      "test": "Excel import (no auth)",
+      "error": "Expected 401, got: None",
+      "response": null
+    },
+    {
+      "test": "FRCS import (no auth)",
+      "error": "Expected 401, got: None",
+      "response": null
+    },
+    {
+      "test": "MOJ import (no auth)",
+      "error": "Expected 401, got: None",
+      "response": null
+    }
+  ]
+}
